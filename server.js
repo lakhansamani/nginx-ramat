@@ -11,7 +11,11 @@ app.prepare().then(() => {
     const parsedUrl = new URL(req.url, 'http://w.w');
     const { pathname, query } = parsedUrl;
 
-    handle(req, res, parsedUrl);
+    if (pathname === '/fr') {
+      app.render(req, res, '/fr', query);
+    } else {
+      handle(req, res, parsedUrl);
+    }
   }).listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
